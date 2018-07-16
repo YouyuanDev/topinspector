@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#container1 {
+				width: 90%;
+				margin: 0 auto;
+				height: 300px;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<div id="container1"></div>
+	</body>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=rMLCpcqZ0hySdnFfia4hGPaxwajQVFfr"></script>
+		<script src="assets/js/vendor/jquery-1.11.2.min.js"></script>
+		<script src="assets/js/jquery.baiduMap.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				new BaiduMap({
+					id: "container1",
+					title: {
+						text: "北京故宫博物院",
+						className: "title"// 选填--样式类名
+					},
+					content: {
+						className: "content",// 选填--样式类名
+						text: ["地址：北京市东城区东华门大街", "电话：(010)65131892"]
+					},
+					point: {
+						lng: "116.412222",
+						lat: "39.912345"
+					},
+					level: 15,//  选填--地图级别--(默认15)
+					zoom:true,// 选填--是否启用鼠标滚轮缩放功能--(默认false)
+					type: ["地图", "卫星", "三维"],// 选填--显示地图类型--(默认不显示)
+					width: 320,// 选填--信息窗口width--(默认自动调整)
+					height: 70,// 选填--信息窗口height--(默认自动调整)
+					icon: {    // 选填--自定义icon图标
+						url: "../images/marker.png",
+						width: 36,
+						height: 36
+					}
+			 });
+			});
+		</script>
+</html>
