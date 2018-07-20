@@ -1,9 +1,10 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
+
+<html>
+	<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+	<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+	<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+	<!--[if gt IE 8]><!-->
+	<html class="no-js" lang="en">
 	<!--<![endif]-->
 
 	<head>
@@ -12,7 +13,6 @@
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/png" href="favicon.ico">
-
 		<!--Google Font link-->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
@@ -34,7 +34,40 @@
 		<!--Theme Responsive css-->
 		<link rel="stylesheet" href="assets/css/responsive.css" />
 		<script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-
+		<script type="text/javascript">
+			function submitMessage() {
+				var client_name = $('#first_name').val();
+				var message = $('#message').val();
+				var phone_no = $('#phone').val();
+				var data = {
+					client_name: client_name,
+					message_time: getDate1(),
+					message: message,
+					phone_no: phone_no
+				};
+				var url = "/MessageOP/saveMessage.action";
+				$.ajax({
+					type: "post",
+					url: url,
+					async: false,
+					dataType: "json",
+					data: data,
+					success: function(data) {
+						if(data) {
+							if(data.success) {
+								alert(data.message);
+							}
+						}
+						$('#first_name').val('');
+						$('#message').val('');
+						$('#phone').val('');
+					},
+					error: function() {
+						alert('发送失败,请尝试电话联系!');
+					}
+				});
+			}
+		</script>
 		<!---->
 	</head>
 
@@ -73,38 +106,38 @@
 					<div class="attr-nav">
 						<ul>
 							<!--<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="fa fa-shopping-bag"></i>
-									<span class="badge">3</span>
-								</a>
-								<ul class="dropdown-menu cart-list">
-									<li>
-										<a href="#" class="photo"><img src="assets/images/thumb01.jpg" class="cart-thumb" alt="" /></a>
-										<h6><a href="#">Delica omtantur </a></h6>
-										<p class="m-top-10">2x - <span class="price">$99.99</span></p>
-									</li>
-									<li>
-										<a href="#" class="photo"><img src="assets/images/thumb01.jpg" class="cart-thumb" alt="" /></a>
-										<h6><a href="#">Delica omtantur </a></h6>
-										<p class="m-top-10">2x - <span class="price">$99.99</span></p>
-									</li>
-									<li>
-										<a href="#" class="photo"><img src="assets/images/thumb01.jpg" class="cart-thumb" alt="" /></a>
-										<h6><a href="#">Delica omtantur </a></h6>
-										<p class="m-top-10">2x - <span class="price">$99.99</span></p>
-									</li>
-									<li class="total">
-										<span class="pull-right"><strong>Total</strong>: $0.00</span>
-										<a href="#" class="btn btn-cart">Cart</a>
-									</li>
-								</ul>
-							</li>-->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span class="badge">3</span>
+                        </a>
+                        <ul class="dropdown-menu cart-list">
+                            <li>
+                                <a href="#" class="photo"><img src="assets/images/thumb01.jpg" class="cart-thumb" alt="" /></a>
+                                <h6><a href="#">Delica omtantur </a></h6>
+                                <p class="m-top-10">2x - <span class="price">$99.99</span></p>
+                            </li>
+                            <li>
+                                <a href="#" class="photo"><img src="assets/images/thumb01.jpg" class="cart-thumb" alt="" /></a>
+                                <h6><a href="#">Delica omtantur </a></h6>
+                                <p class="m-top-10">2x - <span class="price">$99.99</span></p>
+                            </li>
+                            <li>
+                                <a href="#" class="photo"><img src="assets/images/thumb01.jpg" class="cart-thumb" alt="" /></a>
+                                <h6><a href="#">Delica omtantur </a></h6>
+                                <p class="m-top-10">2x - <span class="price">$99.99</span></p>
+                            </li>
+                            <li class="total">
+                                <span class="pull-right"><strong>Total</strong>: $0.00</span>
+                                <a href="#" class="btn btn-cart">Cart</a>
+                            </li>
+                        </ul>
+                    </li>-->
 							<li class="search">
 								<a href="#"><i class="fa fa-search"></i></a>
 							</li>
-							<li class="side-menu">
-								<a href="#"><i class="fa fa-bars"></i></a>
-							</li>
+							<!--<%--<li class="side-menu">--%>
+							<%--<a href="#"><i class="fa fa-bars"></i></a>--%>
+							<%--</li>--%>-->
 						</ul>
 					</div>
 					<!-- End Atribute Navigation -->
@@ -112,10 +145,10 @@
 					<!-- Start Header Navigation -->
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                            <i class="fa fa-bars"></i>
-                        </button>
+                    <i class="fa fa-bars"></i>
+                </button>
 						<a class="navbar-brand" href="#brand">
-							<img src="assets/images/logo.png" class="logo logo-display m-top-10" alt="">
+							<img src="assets/images/logo.png" class="logo logo-display" alt="">
 							<img src="assets/images/logo.jpg" class="logo logo-scrolled" alt="">
 						</a>
 					</div>
@@ -150,54 +183,54 @@
 				</div>
 
 				<!-- Start Side Menu -->
-				<div class="side">
-					<a href="#" class="close-side"><i class="fa fa-times"></i></a>
-					<div class="widget">
-						<h6 class="title">Custom Pages</h6>
-						<ul class="link">
-							<li>
-								<a href="#">About</a>
-							</li>
-							<li>
-								<a href="#">Services</a>
-							</li>
-							<li>
-								<a href="#">Blog</a>
-							</li>
-							<li>
-								<a href="#">Portfolio</a>
-							</li>
-							<li>
-								<a href="#">Contact</a>
-							</li>
-						</ul>
-					</div>
-					<div class="widget">
-						<h6 class="title">Additional Links</h6>
-						<ul class="link">
-							<li>
-								<a href="#">Retina Homepage</a>
-							</li>
-							<li>
-								<a href="#">New Page Examples</a>
-							</li>
-							<li>
-								<a href="#">Parallax Sections</a>
-							</li>
-							<li>
-								<a href="#">Shortcode Central</a>
-							</li>
-							<li>
-								<a href="#">Ultimate Font Collection</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<!--<%--<div class="side">--%>
+				<%--<a href="#" class="close-side"><i class="fa fa-times"></i></a>--%>
+				<%--<div class="widget">--%>
+				<%--<h6 class="title">Custom Pages</h6>--%>
+				<%--<ul class="link">--%>
+				<%--<li>--%>
+				<%--<a href="#">About</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+				<%--<a href="#">Services</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+				<%--<a href="#">Blog</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+				<%--<a href="#">Portfolio</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+				<%--<a href="#">Contact</a>--%>
+				<%--</li>--%>
+				<%--</ul>--%>
+				<%--</div>--%>
+				<%--<div class="widget">--%>
+				<%--<h6 class="title">Additional Links</h6>--%>
+				<%--<ul class="link">--%>
+				<%--<li>--%>
+				<%--<a href="#">Retina Homepage</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+				<%--<a href="#">New Page Examples</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+				<%--<a href="#">Parallax Sections</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+				<%--<a href="#">Shortcode Central</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+				<%--<a href="#">Ultimate Font Collection</a>--%>
+				<%--</li>--%>
+				<%--</ul>--%>
+				<%--</div>--%>
+				<%--</div>--%>-->
 				<!-- End Side Menu -->
 
 			</nav>
 
-			<!--Home Sections-->
+			<!--首页 Sections-->
 
 			<section id="hello" class="home bg-mega">
 				<div class="overlay"></div>
@@ -221,7 +254,7 @@
 			</section>
 			<!--End off Home Sections-->
 
-			<!--production Section-->
+			<!--功能与服务Section-->
 			<section id="production" class="production lightbg">
 				<div class="container">
 					<div class="row">
@@ -240,8 +273,8 @@
 									</div>
 									<div class="production_price_border text-center">
 										<div class="production_price">
-											<h3 class="text-white">$19</h3>
-											<p class="text-white">per month</p>
+											<h3 class="text-white"><i class="fa fa-database"></i></h3>
+											<%--<p class="text-white">per month</p>--%>
 										</div>
 									</div>
 
@@ -274,8 +307,8 @@
 									</div>
 									<div class="production_price_border text-center">
 										<div class="production_price">
-											<h3 class="text-white">$39</h3>
-											<p class="text-white">per month</p>
+											<h3 class="text-white"><i class="fa fa-pencil"></i></h3>
+											<%--<p class="text-white">per month</p>--%>
 										</div>
 									</div>
 
@@ -303,8 +336,8 @@
 									</div>
 									<div class="production_price_border text-center">
 										<div class="production_price">
-											<h3 class="text-white">$99</h3>
-											<p class="text-white">per month</p>
+											<h3 class="text-white"><i class="fa fa-pie-chart"></i></h3>
+											<!--<%--<p class="text-white">per month</p>--%>-->
 										</div>
 									</div>
 
@@ -363,36 +396,37 @@
 						<!-- 服务结束 -->
 					</div>
 				</div>
-				<!--End off row-->
+			</section>
+			<!--End off row-->
 		</div>
 		<!--End off container -->
 		<!--</section>-->
 		<!--End off production section -->
 
 		<!--Video section-->
-		<section id="video" class="video">
-			<div class="overlay"></div>
-			<div class="main_video roomy-100 m-top-100 m-bottom-100 text-center">
-				<div class="video_text text-center">
-					<a href="http://www.youtube.com/watch?v=7HKoqNJtMTQ" class="video-link"><span class="fa fa-play"></span></a>
-				</div>
-			</div>
-		</section>
+		<!--<%--<section id="video" class="video">--%>
+		<%--<div class="overlay"></div>--%>
+		<%--<div class="main_video roomy-100 m-top-100 m-bottom-100 text-center">--%>
+		<%--<div class="video_text text-center">--%>
+		<%--<a href="http://www.youtube.com/watch?v=7HKoqNJtMTQ" class="video-link"><span class="fa fa-play"></span></a>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</section>--%>-->
 		<!--End off video section -->
 
-		<div class="container">
-			<div class="row">
-				<div class="main_featured m-top-100">
-					<div class="col-sm-12">
-						<div class="head_title text-center">
-							<h2>FEATURED WORK</h2>
-							<div class="separator_auto"></div>
-							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<!--<%--<div class="container">--%>
+		<%--<div class="row">--%>
+		<%--<div class="main_featured m-top-100">--%>
+		<%--<div class="col-sm-12">--%>
+		<%--<div class="head_title text-center">--%>
+		<%--<h2>FEATURED WORK</h2>--%>
+		<%--<div class="separator_auto"></div>--%>
+		<%--<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>-->
 
 		<div class="featured_slider">
 			<div>
@@ -427,78 +461,78 @@
 			</div>
 		</div>
 		<!-- End off featured slider -->
-		<div class="copyrights">Collect from
-			<a href="http://www.cssmoban.com/">企业网站模板</a>
-		</div>
+		<!--<%--<div class="copyrights">Collect from--%>
+		<%--<a href="http://www.cssmoban.com/">企业网站模板</a>--%>
+		<%--</div>--%>-->
 
 		<!--Service Section-->
 		<!--<section id="service" class="service">
-			<div class="container">
-				<div class="row">
-					<div class="main_service roomy-100">
-						<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-							<div class="head_title text-center">
-								<h2>OUR SERVICES</h2>
-								<div class="separator_auto"></div>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-							</div>
-						</div>
+    <div class="container">
+        <div class="row">
+            <div class="main_service roomy-100">
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                    <div class="head_title text-center">
+                        <h2>OUR SERVICES</h2>
+                        <div class="separator_auto"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+                    </div>
+                </div>
 
-						<div class="col-md-4">
-							<div class="service_item">
-								<i class="icofont icofont-light-bulb"></i>
-								<h6 class="m-top-30">BRANDING</h6>
-								<div class="separator_small"></div>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="service_item">
-								<i class="icofont icofont-imac"></i>
-								<h6 class="m-top-30">BRANDING</h6>
-								<div class="separator_small"></div>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="service_item">
-								<i class="icofont icofont-video"></i>
-								<h6 class="m-top-30">BRANDING</h6>
-								<div class="separator_small"></div>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		-->
-			
+                <div class="col-md-4">
+                    <div class="service_item">
+                        <i class="icofont icofont-light-bulb"></i>
+                        <h6 class="m-top-30">BRANDING</h6>
+                        <div class="separator_small"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service_item">
+                        <i class="icofont icofont-imac"></i>
+                        <h6 class="m-top-30">BRANDING</h6>
+                        <div class="separator_small"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service_item">
+                        <i class="icofont icofont-video"></i>
+                        <h6 class="m-top-30">BRANDING</h6>
+                        <div class="separator_small"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+-->
+
 		<!--End off Featured section-->
 
 		<!--Impress section-->
 		<!--<section id="impress" class="impress roomy-100">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="main_impress text-center">
-						<div class="col-sm-8 col-sm-offset-2">
-							<h2 class="text-white text-uppercase">Impressed?  Let’s work together</h2>
-							<p class="m-top-40 text-white">At vero eos et accusamus et iusto odio dignissimos ducimus qui ditqs praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias</p>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="main_impress text-center">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <h2 class="text-white text-uppercase">Impressed?  Let’s work together</h2>
+                    <p class="m-top-40 text-white">At vero eos et accusamus et iusto odio dignissimos ducimus qui ditqs praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias</p>
 
-							<div class="impress_btns m-top-30">
-								<a href="" class="btn btn-primary m-top-20">HIRE US</a>
-								<a href="" class="btn btn-default m-top-20">HIRE US</a>
-							</div>
-						</div>
-					</div>
-				</div>
+                    <div class="impress_btns m-top-30">
+                        <a href="" class="btn btn-primary m-top-20">HIRE US</a>
+                        <a href="" class="btn btn-default m-top-20">HIRE US</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			</div>
+    </div>
 
-		</section>
-		-->
-			
+</section>
+-->
+
 		<!-- End off Impress section-->
 
 		<!--解决方案Section-->
@@ -510,94 +544,98 @@
 							<div class="head_title text-center">
 								<h2>解决方案</h2>
 								<div class="separator_auto"></div>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
 							</div>
 						</div>
 
 						<div class="portfolio_content">
-							<div class="col-md-8">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="portfolio_item">
-											<img src="assets/images/solution/IMG_0.JPG" alt="" />
-											<div class="portfolio_hover text-center">
-												<h6 class="text-uppercase text-white">Title</h6>
-												<p class=" text-white">Lorem ipsum dolor sit amet</p>
-												<div class="portfolio_hover_icon">
-													<a href="assets/images/Portfolio/2.jpg" class="popup-img"><i class="fa fa-expand"></i></a>
-													<a href=""><i class="fa fa-search"></i></a>
+							<div class="col-md-12">
+
+								<div class="col-md-8">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="portfolio_item">
+												<img src="assets/images/solution/IMG_0.JPG" alt="" />
+												<div class="portfolio_hover text-center">
+													<h6 class="text-uppercase text-white"></h6>
+													<p class=" text-white"></p>
+													<div class="portfolio_hover_icon">
+														<a href="assets/images/Portfolio/2.jpg" class="popup-img"><i class="fa fa-expand"></i></a>
+														<a href=""><i class="fa fa-search"></i></a>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="col-md-6 m-top-30">
-										<div class="portfolio_item portfolio_item2">
-											<img src="assets/images/solution/IMG_10.PNG" alt=""  class="solution_img"/>
-											<div class="portfolio_hover text-center">
-												<h6 class="text-uppercase text-white">Title</h6>
-												<p class=" text-white">Lorem ipsum dolor sit amet</p>
-												<div class="portfolio_hover_icon">
-													<a href="assets/images/Portfolio/3.jpg" class="popup-img"><i class="fa fa-expand"></i></a>
-													<a href=""><i class="fa fa-search"></i></a>
-												</div>
-											</div>
-										</div>
+								</div>
+
+								<div class="col-md-4">
+									<div class="portfolio_item portfolio_item3 sm-m-top-30">
+										<p style="text-indent:10px;line-height:2.5em;">
+											通过实现远程、动态、实时的智能化手持设备，替换传统生产管理方式的前台人工数据采集，更好的与后台计算机数据库结合，实现对日常生产管理中的工序数据，产品数据等进行实时监控、记录和自动更新。并且按照生产订单的关键工艺标准及检验标准进行校验，提供监理人员实时见证和数据追溯的便捷性，提供工厂工程人员对产品制造控制参数的实时分析和多样分析的可能性，提供对生产成本控制的数据支持等作用。
+										</p>
+										 
 									</div>
-									<div class="col-md-6 m-top-30">
-										<div class="portfolio_item portfolio_item2">
-											<img src="assets/images/solution/IMG_4.PNG" alt="" />
-											<div class="portfolio_hover text-center">
-												<h6 class="text-uppercase text-white">Title</h6>
-												<p class=" text-white">Lorem ipsum dolor sit amet</p>
-												<div class="portfolio_hover_icon">
-													<a href="assets/images/Portfolio/5.jpg" class="popup-img"><i class="fa fa-expand"></i></a>
-													<a href=""><i class="fa fa-search"></i></a>
-												</div>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="col-md-4 m-top-30">
+									<div class="portfolio_item portfolio_item2">
+										<p>
+											Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+										</p>
+										<p>
+											Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+										</p>
+									</div>
+								</div>
+								<div class="col-md-8 m-top-30">
+									<div class="portfolio_item">
+										<img src="assets/images/solution/IMG_2.JPG" alt="" />
+										<div class="portfolio_hover text-center">
+											<h6 class="text-uppercase text-white"></h6>
+											<p class=" text-white"></p>
+											<div class="portfolio_hover_icon">
+												<a href="assets/images/Portfolio/4.jpg" class="popup-img"><i class="fa fa-expand"></i></a>
+												<a href=""><i class="fa fa-search"></i></a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 
-							<div class="col-md-4">
-								<div class="portfolio_item portfolio_item3 sm-m-top-30">
-									<img src="assets/images/solution/IMG_5.PNG" alt="" />
-									<div class="portfolio_hover text-center">
-										<h6 class="text-uppercase text-white">Title</h6>
-										<p class=" text-white">Lorem ipsum dolor sit amet</p>
-										<div class="portfolio_hover_icon">
-											<a href="assets/images/Portfolio/1.jpg" class="popup-img"><i class="fa fa-expand"></i></a>
-											<a href=""><i class="fa fa-search"></i></a>
+							<div class="col-md-12">
+
+								<div class="col-md-8">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="portfolio_item">
+												<img src="assets/images/solution/IMG_11.JPG" alt="" />
+												<div class="portfolio_hover text-center">
+													<h6 class="text-uppercase text-white"></h6>
+													<p class=" text-white"></p>
+													<div class="portfolio_hover_icon">
+														<a href="assets/images/Portfolio/2.jpg" class="popup-img"><i class="fa fa-expand"></i></a>
+														<a href=""><i class="fa fa-search"></i></a>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-4 m-top-30">
-								<div class="portfolio_item portfolio_item2">
-									<img src="assets/images/solution/IMG_6.PNG" alt="" />
-									<div class="portfolio_hover text-center">
-										<h6 class="text-uppercase text-white">Title</h6>
-										<p class=" text-white">Lorem ipsum dolor sit amet</p>
-										<div class="portfolio_hover_icon">
-											<a href="assets/images/Portfolio/6.jpg" class="popup-img"><i class="fa fa-expand"></i></a>
-											<a href=""><i class="fa fa-search"></i></a>
-										</div>
+
+								<div class="col-md-4">
+									<div class="portfolio_item portfolio_item3 sm-m-top-30">
+										<p>
+											Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+										</p>
+										<p>
+											Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+										</p>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-8 m-top-30">
-								<div class="portfolio_item">
-									<img src="assets/images/solution/IMG_2.JPG" alt="" />
-									<div class="portfolio_hover text-center">
-										<h6 class="text-uppercase text-white">Title</h6>
-										<p class=" text-white">Lorem ipsum dolor sit amet</p>
-										<div class="portfolio_hover_icon">
-											<a href="assets/images/Portfolio/4.jpg" class="popup-img"><i class="fa fa-expand"></i></a>
-											<a href=""><i class="fa fa-search"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
+
 						</div>
 
 					</div>
@@ -617,27 +655,27 @@
 							<div class="skill_content wow fadeIn">
 								<h2>团队</h2>
 								<div class="separator_left"></div>
-
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-
+								<p>团队介绍：团队由经验丰富、高素质人才组成，团队成员年轻并充满朝气，具有强烈的创新意识并勇于迎接挑战。</p>
+                                <p>团队理念：秉承诚信、规范、高效的工作原则，用技术赢得市场，以创意服务取得信誉，竭诚为广大客户提供优质、高效、快捷的服务。面向未来，坚持自主创新。</p>
+								
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="skill_bar sm-m-top-50">
-								<div class="teamskillbar clearfix m-top-20" data-percent="80%">
-									<h6>GRAPHIC DESIGN</h6>
+								<div class="teamskillbar clearfix m-top-20" data-percent="90%">
+									<h6>结构设计/Architecture Design</h6>
 									<div class="teamskillbar-bar"></div>
 								</div>
 								<!-- End Skill Bar -->
 
-								<div class="teamskillbar clearfix m-top-50" data-percent="75%">
-									<h6>TYPOGRAPHY</h6>
+								<div class="teamskillbar clearfix m-top-50" data-percent="95%">
+									<h6>算法实现/Algorithm Implement</h6>
 									<div class="teamskillbar-bar"></div>
 								</div>
 								<!-- End Skill Bar -->
 
 								<div class="teamskillbar clearfix m-top-50" data-percent="90%">
-									<h6>HTML / CSS</h6>
+									<h6>数据分析/Data Analysis</h6>
 									<div class="teamskillbar-bar"></div>
 								</div>
 								<!-- End Skill Bar -->
@@ -660,30 +698,30 @@
 					<div class="skill_bottom_content text-center">
 						<div class="col-md-3">
 							<div class="skill_bottom_item">
-								<h2 class="statistic-counter">3468</h2>
+								<h2 class="statistic-counter">38</h2>
 								<div class="separator_small"></div>
-								<h5><em>Projects Finished</em></h5>
+								<h5><em>项目完成</em></h5>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="skill_bottom_item">
-								<h2 class="statistic-counter">4638</h2>
+								<h2 class="statistic-counter">28</h2>
 								<div class="separator_small"></div>
-								<h5><em>Happy Clients</em></h5>
+								<h5><em>客户</em></h5>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="skill_bottom_item">
-								<h2 class="statistic-counter">3468</h2>
+								<h2 class="statistic-counter">16854</h2>
 								<div class="separator_small"></div>
-								<h5><em>Hours of work</em></h5>
+								<h5><em>工作时间</em></h5>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="skill_bottom_item">
-								<h2 class="statistic-counter">3468</h2>
+								<h2 class="statistic-counter">8427</h2>
 								<div class="separator_small"></div>
-								<h5><em>Cup of coffee</em></h5>
+								<h5><em>休闲娱乐</em></h5>
 							</div>
 						</div>
 					</div>
@@ -695,155 +733,155 @@
 		<!--End off Skill section -->
 
 		<!--Testimonial Section-->
-		<section id="testimonial" class="testimonial fix">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="main_testimonial roomy-100">
-						<div class="head_title text-center">
-							<h2 class="text-white">OUR TESTIMONIALS</h2>
-						</div>
-						<div class="testimonial_slid text-center">
-							<div class="testimonial_item">
-								<div class="col-sm-10 col-sm-offset-1">
-									<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+		<!--<%--<section id="testimonial" class="testimonial fix">--%>
+		<%--<div class="overlay"></div>--%>
+		<%--<div class="container">--%>
+		<%--<div class="row">--%>
+		<%--<div class="main_testimonial roomy-100">--%>
+		<%--<div class="head_title text-center">--%>
+		<%--<h2 class="text-white">OUR TESTIMONIALS</h2>--%>
+		<%--</div>--%>
+		<%--<div class="testimonial_slid text-center">--%>
+		<%--<div class="testimonial_item">--%>
+		<%--<div class="col-sm-10 col-sm-offset-1">--%>
+		<%--<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>--%>
 
-									<div class="test_authour m-top-30">
-										<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="testimonial_item">
-								<div class="col-sm-10 col-sm-offset-1">
-									<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+		<%--<div class="test_authour m-top-30">--%>
+		<%--<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--<div class="testimonial_item">--%>
+		<%--<div class="col-sm-10 col-sm-offset-1">--%>
+		<%--<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>--%>
 
-									<div class="test_authour m-top-30">
-										<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="testimonial_item">
-								<div class="col-sm-10 col-sm-offset-1">
-									<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+		<%--<div class="test_authour m-top-30">--%>
+		<%--<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--<div class="testimonial_item">--%>
+		<%--<div class="col-sm-10 col-sm-offset-1">--%>
+		<%--<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>--%>
 
-									<div class="test_authour m-top-30">
-										<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="testimonial_item">
-								<div class="col-sm-10 col-sm-offset-1">
-									<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+		<%--<div class="test_authour m-top-30">--%>
+		<%--<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--<div class="testimonial_item">--%>
+		<%--<div class="col-sm-10 col-sm-offset-1">--%>
+		<%--<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>--%>
 
-									<div class="test_authour m-top-30">
-										<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--End off row-->
-			</div>
-			<!--End off container -->
-		</section>
+		<%--<div class="test_authour m-top-30">--%>
+		<%--<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--<i class="fa fa-star"></i>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--<!--End off row-->
+		<!--<%--</div>--%>
+		<%--<!--End off container -->
+		<!--</section>-->
 		<!--End off Testimonial section -->
 
 		<!--client brand section-->
 		<!--<section id="cbrand" class="cbrand">
-			<div class="container">
-				<div class="row">
-					<div class="main_cbrand text-center roomy-100">
-						<div class="col-md-2 col-sm-4 col-xs-6">
-							<div class="cbrand_item m-bottom-10">
-								<a href=""><img src="assets/images/clients/1.jpg" alt="" /></a>
-							</div>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6">
-							<div class="cbrand_item m-bottom-10">
-								<a href=""><img src="assets/images/clients/2.jpg" alt="" /></a>
-							</div>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6">
-							<div class="cbrand_item m-bottom-10">
-								<a href=""><img class="" src="assets/images/clients/5.jpg" alt="" /></a>
-							</div>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6">
-							<div class="cbrand_item m-bottom-10">
-								<a href=""><img src="assets/images/clients/4.jpg" alt="" /></a>
-							</div>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6">
-							<div class="cbrand_item m-bottom-10">
-								<a href=""><img src="assets/images/clients/3.jpg" alt="" /></a>
-							</div>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6">
-							<div class="cbrand_item m-bottom-10">
-								<a href=""><img src="assets/images/clients/1.jpg" alt="" /></a>
-							</div>
-						</div>
-					</div>
-				</div>
+    <div class="container">
+        <div class="row">
+            <div class="main_cbrand text-center roomy-100">
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="cbrand_item m-bottom-10">
+                        <a href=""><img src="assets/images/clients/1.jpg" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="cbrand_item m-bottom-10">
+                        <a href=""><img src="assets/images/clients/2.jpg" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="cbrand_item m-bottom-10">
+                        <a href=""><img class="" src="assets/images/clients/5.jpg" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="cbrand_item m-bottom-10">
+                        <a href=""><img src="assets/images/clients/4.jpg" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="cbrand_item m-bottom-10">
+                        <a href=""><img src="assets/images/clients/3.jpg" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="cbrand_item m-bottom-10">
+                        <a href=""><img src="assets/images/clients/1.jpg" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			</div>
+    </div>
 
-		</section>
-		-->
-			
+</section>
+-->
+
 		<!-- End off Cbrand section -->
 
 		<!--Subscribe section-->
 		<!--<section id="subscribe" class="subscribe roomy-100 fix">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="main_subscribe text-center">
-						<div class="col-sm-8 col-sm-offset-2">
-							<h2 class="text-white">SUBSCRIBE US</h2>
-							<p class="m-top-30 text-white">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
-						</div>
-						<div class="col-sm-10 col-sm-offset-1">
-							<div class="subscribe_btns m-top-40">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="main_subscribe text-center">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <h2 class="text-white">SUBSCRIBE US</h2>
+                    <p class="m-top-30 text-white">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
+                </div>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="subscribe_btns m-top-40">
 
-								<form class="form-inline">
-									<div class="form-group">
-										<input type="email" class="form-control" id="inputEmail2" placeholder="Email Address">
-									</div>
-									<button type="submit" class="btn btn-primary">SUBSCRIBE</button>
-								</form>
-							</div>
-						</div>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="inputEmail2" placeholder="Email Address">
+                            </div>
+                            <button type="submit" class="btn btn-primary">SUBSCRIBE</button>
+                        </form>
+                    </div>
+                </div>
 
-					</div>
-				</div>
+            </div>
+        </div>
 
-			</div>
+    </div>
 
-		</section>
-		-->
-			
+</section>
+-->
+
 		<!-- End off Impress section-->
 
 		<!--动态Section-->
@@ -855,39 +893,39 @@
 							<div class="head_title text-center">
 								<h2>动态</h2>
 								<div class="separator_auto"></div>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-							</div>
+<!--								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+-->							</div>
 						</div>
 						<div class="col-md-4 sec-animate3">
-							<div class="blog_item m-top-20">
+							<div class=" m-top-20">
 								<div class="blog_item_img">
-									<img src="assets/images/Blog/1.jpg" alt="" />
+									<img src="assets/images/solution/IMG_10.PNG" alt="" />
 								</div>
 								<div class="blog_text roomy-40">
-									<h6>海隆管道APP已上线</h6>
-									<p><em><a href="">May 15, 2018</a> /<a href="">admin</a>/<a href=""> Co-working</a></em></p>
+									<h6>钢管涂层生产信息化控制系统APP-主页</h6>
+									<p><em><a href="">July 30, 2018</a> /<a href="">Top Inspector Product.</a></em></p>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-4 sec-animate4">
-							<div class="blog_item m-top-20">
+							<div class=" m-top-20">
 								<div class="blog_item_img">
-									<img src="assets/images/Blog/2.jpg" alt="" />
+									<img src="assets/images/solution/IMG_8.PNG" alt="" />
 								</div>
 								<div class="blog_text roomy-40">
-									<h6>PLEASUARE WITHOUT CONSCIENCE</h6>
-									<p><em><a href="">May 15, 2018</a> /<a href="">admin</a>/<a href=""> Co-working</a></em></p>
+									<h6>钢管涂层生产信息化控制系统APP-产品信息页</h6>
+									<p><em><a href="">July 30, 2018</a> /<a href="">Top Inspector Product.</a></em></p>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-4 sec-animate5">
-							<div class="blog_item m-top-20">
+							<div class=" m-top-20">
 								<div class="blog_item_img">
-									<img src="assets/images/Blog/3.jpg" alt="" />
+									<img src="assets/images/solution/IMG_9.PNG" alt="" />
 								</div>
 								<div class="blog_text roomy-40">
-									<h6>PLEASUARE WITHOUT CONSCIENCE</h6>
-									<p><em><a href="">May 15, 2018</a> /<a href="">admin</a>/<a href=""> Co-working</a></em></p>
+									<h6>钢管涂层生产信息化控制系统APP-工序检测表单</h6>
+									<p><em><a href="">July 30, 2018</a> /<a href="">Top Inspector Product.</a></em></p>
 								</div>
 							</div>
 						</div>
@@ -901,15 +939,15 @@
 
 		<!--Maps Section-->
 		<!--<div class="main_maps text-center fix">
-			<div class="overlay"></div>
-			<div class="maps_text">
+    <div class="overlay"></div>
+    <div class="maps_text">
 
-				<div id="map_canvas" class="mapheight"></div>
-			</div>
-		</div>-->
+        <div id="map_canvas" class="mapheight"></div>
+    </div>
+</div>-->
 		<!-- End off Maps Section-->
 
-		<!--About Sections-->
+		<!--关于我们Sections-->
 		<section id="about" class="about roomy-100">
 			<div class="container">
 				<div class="row">
@@ -943,23 +981,23 @@
 									<!-- End off accordion item-1 -->
 
 									<!--<h6><i class="fa fa-angle-right"></i>基本信息</h6>
-									<div>
-										<div class="content">
-											<p>公司名称：</p>
-											<p>企业性质：民营公司</p>
-											<p>经营模式：计算机软件 计算机服务</p>
-											<p>法人代表：</p>
-											<p>员工人数：少于50人</p>
-											<p>成立年份：2011年10月10日</p>
-										</div>
-									</div>-->
+                            <div>
+                                <div class="content">
+                                    <p>公司名称：</p>
+                                    <p>企业性质：民营公司</p>
+                                    <p>经营模式：计算机软件 计算机服务</p>
+                                    <p>法人代表：</p>
+                                    <p>员工人数：少于50人</p>
+                                    <p>成立年份：2011年10月10日</p>
+                                </div>
+                            </div>-->
 									<!-- End off accordion item-2 -->
 									<!--<h6><i class="fa fa-angle-right"></i>公司地址</h6>
-									<div>
-										<div class="content">
-											<p></p>
-										</div>
-									</div>-->
+                            <div>
+                                <div class="content">
+                                    <p></p>
+                                </div>
+                            </div>-->
 									<h6> <i class="fa fa-angle-right"></i>联系电话 </h6>
 									<div>
 										<div class="content">
@@ -993,9 +1031,9 @@
 									<div class="ab_head_icon">
 										<i class="icofont icofont-fire-burn"></i>
 									</div>
-									<h6 class="m-top-20"> WE’RE CREATIVE</h6>
+									<h6 class="m-top-20"><em>创造力</em></h6>
 								</div>
-								<p class="m-top-20">Lorem ipsum dolor sit amet, consectetuer adipiscing ealit, sed diaim nonummy nibsih euismod tincidiunt laorieet doloire magna diam aliquafm erat voluitpati. </p>
+								<p class="m-top-20">我们几经历练，现在我们是一支非常有创造力的团队，并且这也是我们团队精神不可分割的一部分，支持着我们继续前行。 </p>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -1004,9 +1042,9 @@
 									<div class="ab_head_icon">
 										<i class="icofont icofont-speech-comments"></i>
 									</div>
-									<h6 class="m-top-20">WE'RE FRIENDLY</h6>
+									<h6 class="m-top-20"><em>服务宗旨</em></h6>
 								</div>
-								<p class="m-top-20">Lorem ipsum dolor sit amet, consectetuer adipiscing ealit, sed diaim nonummy nibsih euismod tincidiunt laorieet doloire magna diam aliquafm erat voluitpati. </p>
+								<p class="m-top-20">我们一直都在遵循客户就是上帝的宗旨，服务于我们的客户。我们尽最大努力实现客户的需求、完成客户的既定目标。</p>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -1015,9 +1053,9 @@
 									<div class="ab_head_icon">
 										<i class="icofont icofont-heart"></i>
 									</div>
-									<h6 class="m-top-20">WE LOVE MINIMALISM</h6>
+									<h6 class="m-top-20"><em>极简主义</em></h6>
 								</div>
-								<p class="m-top-20">Lorem ipsum dolor sit amet, consectetuer adipiscing ealit, sed diaim nonummy nibsih euismod tincidiunt laorieet doloire magna diam aliquafm erat voluitpati. </p>
+								<p class="m-top-20">我们崇尚极简主义，并且将它运用到系统中，不仅能改善客户的使用体验，而且降低了系统复杂度。 </p>
 							</div>
 						</div>
 					</div>
@@ -1028,7 +1066,7 @@
 		</section>
 		<!--End off About section -->
 
-		<!--Contact Us Section-->
+		<!--联系我们Section-->
 		<section id="contact" class="contact bg-mega fix">
 			<div class="container">
 				<div class="row">
@@ -1036,35 +1074,39 @@
 						<div class="col-md-4">
 							<div class="rage_widget">
 								<div class="widget_head">
-									<h3 class="text-white">YouYuan Tech.</h3>
+									<h3 class="text-white">Top Inspector</h3>
 									<div class="separator_small"></div>
 								</div>
 								<p>如果有什么问题，你可以通过在此页面发送消息的方式的联系我们，也可以通过以下方式联系我们，我们会最快给你答复。</p>
 								<!--	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
 -->
-								<div class="widget_socail m-top-30">
-									<ul class="list-inline">
+								<div class="widget_socail m-top-40">
+									<ul class="list-inline chat-list">
 										<!--<li>
-											<a href=""><i class="fa fa-qq"></i></a>
-										</li>-->
-										<li>
+                                    <a href=""><i class="fa fa-qq"></i></a>
+                                </li>-->
+										<li class="chat-li">
 											<a href="jacascript:;" class="weixin_qrcode_span" id="chatting_our"><i class="fa fa-weixin"></i></a>
+											<div class="chat-hover weixin_qrcode"><img src="assets/images/fprojects/1.jpg" /></div>
 										</li>
-										<li class="weixin_qrcode">
-											<img src="assets/images/fprojects/1.jpg"/>
+										<li class="chat-li">
+											<a href="jacascript:;" class="chat_email_span" id="chatting_eamil"><i class="fa fa-envelope"></i></a>
+											<div class="chat-hover1 chat_email">
+												<p>43434343@qq.com</p>
+											</div>
 										</li>
 										<!--<li>
-											<a href=""><i class="fa fa-weibo"></i></a>
-										</li>
-										<li>
-											<a href=""><i class="fa fa-facebook"></i></a>
-										</li>-->
+                                    <a href=""><i class="fa fa-weibo"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fa fa-facebook"></i></a>
+                                </li>-->
 									</ul>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-8 sm-m-top-30">
-							<form class="" action="subcribe.php">
+							<form class="" action="" id="messageForm">
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
@@ -1080,10 +1122,10 @@
 
 									<div class="col-sm-12">
 										<div class="form-group">
-											<textarea class="form-control" rows="6" placeholder="消息......"></textarea>
+											<textarea id="message" class="form-control" rows="6" placeholder="消息......"></textarea>
 										</div>
 										<div class="form-group text-center">
-											<a href="" class="btn btn-primary">SEND MESSAGE</a>
+											<a href="javascript:;" class="btn btn-primary" onclick="submitMessage()">发送消息</a>
 										</div>
 									</div>
 
@@ -1110,9 +1152,10 @@
 				<div class="row">
 					<div class="main_footer text-center p-top-40 p-bottom-30">
 						<p class="wow fadeInRight" data-wow-duration="1s">
-							More Templates
-							<a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from
-							<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>2016. All Rights Reserved
+							2018. All Rights Reserved
+						</p>
+						<p>
+							©2018 Top Inspector 沪ICP证0000000号
 						</p>
 					</div>
 				</div>
@@ -1136,6 +1179,7 @@
 
 		<script src="assets/js/plugins.js"></script>
 		<script src="assets/js/main.js"></script>
+		<script src="assets/js/jparticle.jquery.min.js"></script>
 	</body>
 
-</html>
+	</html>
